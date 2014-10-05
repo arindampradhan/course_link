@@ -36,7 +36,7 @@ setup(
     author_email='arindampradhan10@gmail.com',
     maintainer='Arindam Pradhan',
     maintainer_email='arindampradhan10@gmail.com',
-    url='https://github.com/arindampradhan/courselink',
+    url='https://github.com/arindampradhan/course_link',
     license='MIT',
     packages=find_packages(),
     entry_points={
@@ -45,7 +45,7 @@ setup(
         ]
     },
     install_requires=[
-    'beautifulsoup40',
+    'beautifulsoup4',
     'requests'
     ] + extra_dependencies(),
 )
