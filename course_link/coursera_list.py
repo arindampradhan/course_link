@@ -12,14 +12,8 @@
 import requests
 from bs4 import BeautifulSoup
 import os, errno,sys
+import re
 
-
-try:
-    os.makedirs('./course')
-except OSError as exc: # Python >2.5
-    if exc.errno == errno.EEXIST and os.path.isdir(path):
-        pass
-    else: raise
 
 
 
@@ -43,7 +37,7 @@ def course_item(soup):
     for topics in topic_html:
         top_html = str(topics.find('h3'))
         TAG_RE = re.compile(r'<[^>]+>')
-        topic = TAG_RE.sub('', top_html).replace('\xc2\xa0','')
+        topic = TAG_RE.sub('', top_html).replace('\xc2\xa0','').replace(' ','')
         ul_html = topics.findNextSibling('ul')
         li_html = ul_html.find_all('li',class_="unviewed")
         count = len(li_html)
@@ -51,7 +45,7 @@ def course_item(soup):
         view.append(ob)
     return view
 
-def build_scrape(soup,course_lecture):
+def build_scrape(soup,course_lecture,course_name):
     """
     Gets the url links for the video lectures,
     pptxs and pdfs...\n and store them in pdfs,
@@ -88,59 +82,60 @@ def build_scrape(soup,course_lecture):
     question2 = raw_input("Do you want it in an organised way?(Y/N)")
     if question2.lower() is 'yes' or 'y': 
         ## get the urls for all the things
-        with open("./course/pdf_links.txt",'w') as fpdf:
+        with open("./{0}/pdf_links.txt".format(course_name),'w') as fpdf:
             for pdf in pdfs:
                 fpdf.write(pdf)
                 fpdf.write("\n")
 
-        with open("./course/pptx_links.txt",'w') as fpptx:
+        with open("./{0}/pptx_links.txt".format(course_name),'w') as fpptx:
             for ppt in pptxs:
                 fpptx.write(pptx)
                 fpptx.write("\n")
 
-        with open("./course/videos_links.txt",'w') as fvid:
+        with open("./{0}/videos_links.txt".format(course_name),'w') as fvid:
             for vids in videos_links:
                 fvid.write(vids)
                 fvid.write("\n")
 
-
         try:
-            os.mkdir('./course/vids')
-            os.mkdir('./course/pdf')
-            os.mkdir('./course/pptx')
+            os.mkdir('./{0}/vids'.format(course_name))
+            os.mkdir('./{0}/pdf'.format(course_name))
+            os.mkdir('./{0}/pptx'.format(course_name))
         except OSError as exc: # Python >2.5
             if exc.errno == errno.EEXIST and os.path.isdir(path):
                 pass
             else: raise
 
-        
+
         count=0
-        for course in course_lecture:
-            os.mkdir('./course/vids/{0}'.format(course[1]))
+        for cours in course_lecture:
+            os.mkdir('./{0}/vids/{1}'.format(course_name,co`urs[1]))
+            os.mkdir('./{0}/pptx/{1}'.format(course_name,cours[1]))
+            os.mkdir('./{0}/pdf/{1}'.format(course_name,cours[1]))
             constant = count
-            with open("./course/pdf_links.txt",'w') as fpdf:
+            with open("./{0}/pdf/{1}/pdf_links.txt".format(course_name,cours[1]),'w') as fpdf:
                 count = constant
                 count=count+1
                 for pdf in pdfs:
                     fpdf.write(pdf)
                     fpdf.write("\n")
-                    if count is course[0]:break
+                    if count is cours[0]:break
 
-            with open("./course/pptx_links.txt",'w') as fpptx:
+            with open("./{0}/pptx/{1}/pptx_links.txt".format(course_name,cours[1]),'w') as fpptx:
                 count = constant
                 count=count+1
                 for pptx in pptxs:
                     fpptx.write(pptx)
                     fpptx.write("\n")
-                    if count is course[0]:break
+                    if count is cours[0]:break
 
-            with open("./course/videos_links.txt",'w') as fvid:
+            with open("./{0}/vids/{1}/videos_links.txt".format(course_name,cours[1]),'w') as fvid:
                 count=count+1
                 for vids in videos_links:
                     fvid.write(vids)
                     fvid.write("\n")
-                    if count is course[0]:break
-    else: pass
+                    if count is cours[0]:break
+                    else: pass
     question3 = raw_input("Do you want to download the videos?")
 
 
@@ -153,7 +148,7 @@ def ineed_link():
     try:
         url = sys.argv[1]
         if url is None:
-            url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ")
+            url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
     except IndexError:
         url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
         if url is None:
@@ -165,11 +160,13 @@ def ineed_link():
     soup = BeautifulSoup(html) # it's soup 
     course_lecture = course_item(soup) # course lecture preview
 
+    course_name = url.split("/")[3]
+    os.makedirs('./{0}'.format(course_name)) # creating base folder
 
     a_lecture = soup.find('a',class_="lecture-link")['href'] # links for the lectures 
     secret_html = requests.get(a_lecture).text # the back html page which contains all the links for lectures videos,ppts and pdfs.
     soup = BeautifulSoup(secret_html) # soup for the back html page
-    build_scrape(soup,course_lecture)
+    build_scrape(soup,course_lecture,course_name)
 
 if __name__ == '__main__':
     ineed_link()

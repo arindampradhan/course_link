@@ -4,29 +4,11 @@ from setuptools import setup, find_packages
 import course_link
 
 
-
-News
-====
-
-long_description = """
-%(README)s
-
-News
-====
-
-%(CHANGES)s
-
-""" % read('README', 'CHANGES')
-
-setup(
-    name='course_link',
+setup(  
+    name='course_link', 
     version=course_link.__version__,
     description='download videos ,pdfs and pptx from coursera preview',
-    long_description=long_description,
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Environment :: Console",
-        "Intended Audience :: Developers",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
@@ -41,11 +23,11 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'howdoi = howdoi.howdoi:command_line_runner',
+            'cralink = course_link.coursera_list:ineed_link',
         ]
     },
     install_requires=[
     'beautifulsoup4',
     'requests'
-    ] + extra_dependencies(),
+    ] 
 )
