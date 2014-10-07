@@ -15,8 +15,6 @@ import os, errno,sys
 import re
 
 
-
-
 def unique(seq):
     """
     generates a list of unique elements,\n
@@ -79,9 +77,10 @@ def build_scrape(soup,course_lecture,course_name):
     pptxs = unique(pptxs) # list of unique pptxs
     videos_links = unique(videos_links) # list of unique videos_links
 
-    question2 = raw_input("Do you want it in an organised way?(Y/N)")
+    # question2 = raw_input("Do you want it in an organised folder way? (Y/N)")
+    question2 = "y"
     if question2.lower() is 'yes' or 'y': 
-        ## get the urls for all the things
+    ## get the urls for all the things
         with open("./{0}/pdf_links.txt".format(course_name),'w') as fpdf:
             for pdf in pdfs:
                 fpdf.write(pdf)
@@ -106,37 +105,31 @@ def build_scrape(soup,course_lecture,course_name):
                 pass
             else: raise
 
-
         count=0
         for cours in course_lecture:
-            os.mkdir('./{0}/vids/{1}'.format(course_name,co`urs[1]))
+            os.mkdir('./{0}/vids/{1}'.format(course_name,cours[1]))
             os.mkdir('./{0}/pptx/{1}'.format(course_name,cours[1]))
             os.mkdir('./{0}/pdf/{1}'.format(course_name,cours[1]))
-            constant = count
+            
+            count = count + cours[0] # index of the starting course of the week
+            flag = cours[0] + count # flag - count = number of courses in that week
+
+            # cours[0] is the number of urls in that week
             with open("./{0}/pdf/{1}/pdf_links.txt".format(course_name,cours[1]),'w') as fpdf:
-                count = constant
-                count=count+1
-                for pdf in pdfs:
+                for pdf in pdfs[count:flag]:
                     fpdf.write(pdf)
                     fpdf.write("\n")
-                    if count is cours[0]:break
 
             with open("./{0}/pptx/{1}/pptx_links.txt".format(course_name,cours[1]),'w') as fpptx:
-                count = constant
-                count=count+1
-                for pptx in pptxs:
+                for pptx in pptxs[count:flag]:
                     fpptx.write(pptx)
                     fpptx.write("\n")
-                    if count is cours[0]:break
 
             with open("./{0}/vids/{1}/videos_links.txt".format(course_name,cours[1]),'w') as fvid:
-                count=count+1
-                for vids in videos_links:
+                for vids in videos_links[count:flag]:
                     fvid.write(vids)
                     fvid.write("\n")
-                    if count is cours[0]:break
-                    else: pass
-    question3 = raw_input("Do you want to download the videos?")
+    # question3 = raw_input("Do you want to download the videos?")
 
 
 
@@ -170,3 +163,4 @@ def ineed_link():
 
 if __name__ == '__main__':
     ineed_link()
+
