@@ -20,7 +20,7 @@ Features :
 
 Installation
 ============
-	$ python setup install
+	$ python setup.py install
 
 Command
 =======
@@ -62,13 +62,15 @@ The order in which the folder get stored
 
 
 Then simply run:
-Go to any week folder:
-	$ cd vids/week1 
-	$ wget -i vids_urls.txt
 
-To download the week videos ,pdf or pptx go to the corresponding folder and simply run 
+* Go to any week folder:
+
+		$ cd vids/week1 
+		$ wget -i vids_urls.txt
+
+* To download the week videos ,pdf or pptx go to the corresponding folder and simply run 
 
 
-If you want to download all the vids at a time the urls in to parent folder correspond to all the urls...
+* If you want to download all the vids at a time the urls in to parent folder correspond to all the urls...
 
 
