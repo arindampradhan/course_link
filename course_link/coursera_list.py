@@ -13,7 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 import os, errno,sys
 import re
-
+import argparse
 
 def unique(seq):
     """
@@ -131,7 +131,20 @@ def build_scrape(soup,course_lecture,course_name):
                     fvid.write("\n")
     # question3 = raw_input("Do you want to download the videos?")
 
-
+def get_parser():
+    parser = argparse.ArgumentParser(description='generate your coursera vids,ppts and pdfs in an organised way!!')
+    parser.add_argument('query', metavar='QUERY', type=str, nargs='*',
+                        help='the question to answer')
+    parser.add_argument('-a','--all', help='generate all the urls in a folder structure',
+                        action='store_true')
+    parser.add_argument('-v','--vid', help='give vid links only',
+                        action='store_true')
+    parser.add_argument('-s', '--structure', help='generate the folder structure',
+                        action='store_true')
+    parser.add_argument('-n','--num-links', help='number of urls or vids found', default=1, type=int)
+    parser.add_argument('-v','--version', help='displays the current version of howdoi',
+                        action='store_true')
+    return parser
 
 def ineed_link():
     """
@@ -163,4 +176,4 @@ def ineed_link():
 
 if __name__ == '__main__':
     ineed_link()
-
+    
