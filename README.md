@@ -22,18 +22,17 @@ Installation
 ============
 	$ python setup.py install
 
-Command
-=======
-	crlink
 
-Usage
-=====
-simply type
+For Current use :p
+===============
+cd course_link
+python coursera_list.py
+Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
 
-	crlink <url of the coursera course preview>
-	or
-	crlink
-	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
+
+
+
+
 
 
 The order in which the folder get stored
@@ -72,5 +71,24 @@ Then simply run:
 
 
 * If you want to download all the vids at a time the urls in to parent folder correspond to all the urls...
+
+
+TODO
+======
+Commands not working correctly...
+
+Command
+=======
+	crlink
+
+Usage
+=====
+simply type
+
+	crlink <url of the coursera course preview>
+	or
+	crlink
+	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
+
 
 
