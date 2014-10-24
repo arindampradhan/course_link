@@ -25,8 +25,8 @@ Installation
 
 For Current use :p
 ===============
-cd course_link
-python coursera_list.py
+	cd course_link
+	python coursera_list.py
 Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
 
 
