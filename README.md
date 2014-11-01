@@ -20,20 +20,19 @@ Features :
 
 Installation
 ============
-	$ python setup install
+	$ python setup.py install
 
-Command
-=======
-	crlink
 
-Usage
-=====
-simply type
-
-	crlink <url of the coursera course preview>
-	or
-	crlink
+For Current use :p
+===============
+	cd course_link
+	python coursera_list.py
 	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
+
+
+
+
+
 
 
 The order in which the folder get stored
@@ -62,13 +61,34 @@ The order in which the folder get stored
 
 
 Then simply run:
-Go to any week folder:
-	$ cd vids/week1 
-	$ wget -i vids_urls.txt
 
-To download the week videos ,pdf or pptx go to the corresponding folder and simply run 
+* Go to any week folder:
+
+		$ cd vids/week1 
+		$ wget -i vids_urls.txt
+
+* To download the week videos ,pdf or pptx go to the corresponding folder and simply run 
 
 
-If you want to download all the vids at a time the urls in to parent folder correspond to all the urls...
+* If you want to download all the vids at a time the urls in to parent folder correspond to all the urls...
+
+
+TODO
+======
+Commands not working correctly...
+
+Command
+=======
+	crlink
+
+Usage
+=====
+simply type
+
+	crlink <url of the coursera course preview>
+	or
+	crlink
+	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
+
 
 
