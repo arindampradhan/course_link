@@ -13,7 +13,6 @@ import requests
 from bs4 import BeautifulSoup
 import os, errno,sys
 import re
-import argparse
 
 def unique(seq):
     """
@@ -26,7 +25,7 @@ def unique(seq):
 
 def course_item(soup):
     """
-    Gets the course items and lectures for the coursebase
+    Gets the course items and lectures for the soup object.
     """
     course_list_html = soup.find('div',class_='course-lectures-list')
     topic_html = course_list_html.find_all('div',class_='course-item-list-header expanded')
@@ -131,38 +130,29 @@ def build_scrape(soup,course_lecture,course_name):
                     fvid.write("\n")
     # question3 = raw_input("Do you want to download the videos?")
 
-def get_parser():
-    parser = argparse.ArgumentParser(description='generate your coursera vids,ppts and pdfs in an organised way!!')
-    parser.add_argument('query', metavar='QUERY', type=str, nargs='*',
-                        help='the question to answer')
-    parser.add_argument('-a','--all', help='generate all the urls in a folder structure',
-                        action='store_true')
-    parser.add_argument('-v','--vid', help='give vid links only',
-                        action='store_true')
-    parser.add_argument('-s', '--structure', help='generate the folder structure',
-                        action='store_true')
-    parser.add_argument('-n','--num-links', help='number of urls or vids found', default=1, type=int)
-    parser.add_argument('-v','--version', help='displays the current version of howdoi',
-                        action='store_true')
-    return parser
 
 def ineed_link():
     """
     takes the argument or questions for a url to get the 
     information.
     """
-    try:
-        url = sys.argv[1]
-        if url is None:
-            url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
-    except IndexError:
-        url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
-        if url is None:
-            url = raw_input("\nGive the coursera website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
+    url = raw_input("\nGive the coursera course website url〈( ^.^)ノ--► ") # url of the coursera preview lectures 
+    count = 2 #ask the question thrice
+    if len(url) < 1 and count > 0:
+        url = raw_input("\nGive the coursera course website url〈( ^.^)ノ--► ") # ask the question again
+        count = count-1
+    if count is 0:
+        exit()    
 
+    url = url.split('/')[3] #get the course name
+    url = "https://class.coursera.org/"+url+"/lecture/" #url correction
+    
+    request = requests.get(url) # request the url
+    if request.status_code is '404':
+        print "page not found bro ┐(￣ー￣)┌"
+        exit()
 
-
-    html = requests.get(url).text # html of the preview website 
+    html = request.text # html of the preview website 
     soup = BeautifulSoup(html) # it's soup 
     course_lecture = course_item(soup) # course lecture preview
 
