@@ -75,7 +75,9 @@ Then simply run:
 
 TODO
 ======
-Commands not working correctly...
+
+* Commands not working correctly...
+* Activate O'Auth2 token.
 
 Command
 =======
