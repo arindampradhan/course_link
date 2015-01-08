@@ -17,34 +17,21 @@ Features :
 * creates a structured format for videos,pptx and pdfs
 * Simply select your week and use wget no the folder to download the weeks videos.
 
-Usage
-=====
-simply type
-
-	crlink <url of the coursera course preview>
-	or
-	crlink
-	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
-
 Installation
 ============
 	$ python setup.py install
 
-
-
 Usage
 =====
 simply type
 
-	crlink <url of the coursera course preview>
+	$ crlink <url of the coursera course preview>
 
 **Also:**
 
-	crlink
+	$ crlink
+	
 	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
-
-
-
 
 The order in which the folder get stored :
 
