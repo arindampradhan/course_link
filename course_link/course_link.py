@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-######################################################
-#
-# course_list - get the list of videos and also download
-# written by Arindam Pradhan (arindampradhan10@gmail.com)
-# inspired by Benjamin Gleitzman (gleitz@mit.edu)
-#
-######################################################
+###########################################################
+#                                                         #
+# course_list - get the list of videos and also download  #
+# written by Arindam Pradhan (arindampradhan10@gmail.com) #
+#                                                         #
+###########################################################
 
 import requests
 from bs4 import BeautifulSoup
@@ -131,7 +130,7 @@ def build_scrape(soup,course_lecture,course_name):
     # question3 = raw_input("Do you want to download the videos?")
 
 
-def ineed_link():
+def main():
     """
     takes the argument or questions for a url to get the 
     information.
@@ -165,5 +164,5 @@ def ineed_link():
     build_scrape(soup,course_lecture,course_name)
 
 if __name__ == '__main__':
-    ineed_link()
+    main()
     

@@ -1,5 +1,6 @@
-__version__ = '0.0.1'
-__description__ = 'Coursera preview downloads videos,pptx and pdfs from the preview link'
-__title__ = 'course_link'
-__license__ = "MIT"
-__author__ = "Arindam Pradhan"
+__version__ = "0.2.0"
+__author__='Arindam Pradhan',
+__author_email__='arindampradhan10@gmail.com',
+__maintainer__='Arindam Pradhan',
+__maintainer_email__='arindampradhan10@gmail.com',
+__url__='https://github.com/arindampradhan/course_link',
