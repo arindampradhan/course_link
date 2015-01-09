@@ -25,11 +25,11 @@ Usage
 =====
 simply type
 
-	$ crlink <url of the coursera course preview>
+	$ coursr <url of the coursera course preview>
 
 **Also:**
 
-	$ crlink
+	$ coursr
 	
 	Give the coursera website url〈( ^.^)ノ--► https://class.coursera.org/nlp/lecture/preview
 
